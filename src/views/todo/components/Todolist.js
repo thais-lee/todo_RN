@@ -22,6 +22,11 @@ const TodoList = ({item, checkedTask, deleteItem}) => {
       <View style={styles.textWrapper}>
         <Text numberOfLines={isExtended?0:1}  style = {styles.text} onPress={()=> setExtended(!isExtended)}>{item.value}</Text>
       </View>
+      <View style = {styles.editWrapper}>
+          <TouchableOpacity>
+            <Icon name = 'edit-2' size={30} color='#006778'/>
+          </TouchableOpacity>
+      </View>
       <View style = {styles.deleteWraper}>
         <TouchableOpacity onPress={() => deleteItem(item.key)}>
           <Icon name="trash-2" size={30} color='#FF1818'/>
@@ -47,11 +52,15 @@ const styles = StyleSheet.create({
     padding: 10,    
   },
   textWrapper: {
-    flex: 0.8,
+    flex: 0.7,
   }, 
   deleteWraper: {
     flex: 0.1
   },
+  editWrapper:{
+    flex: 0.1
+  }
+  ,
   text: {
     color: '#180A0A'
   },

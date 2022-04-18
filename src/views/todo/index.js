@@ -63,7 +63,7 @@ const TodoView = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1B1A17',
+    backgroundColor: '#E6D5B8',
   },
   header: {
     marginTop: 15,
@@ -71,17 +71,16 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     fontWeight: 'bold',
     paddingBottom: 10,
+    color: 'black'
   },
   text: {
-    color: 'white',
+    color: 'black',
     fontSize: 32,
     fontWeight: 'bold',
     textAlign: 'center',
-    textShadowColor: '#ff7f50',
   },
   headerBar: {
     borderBottomWidth: 1,
-    borderBottomColor: '#E6D5B8',
     marginHorizontal: 10,
     flex: 0.115
 

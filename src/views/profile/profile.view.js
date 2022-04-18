@@ -1,14 +1,14 @@
 import React from 'react';
 import {View, StyleSheet, Text, Button} from 'react-native';
-import ThemeSwitch from './ThemeSwitch';
 
-
-const SettingView = ({navigation}) => {
+const ProfileView = ({navigation }) => {
   return (
     <View style={styles.home}>
-      <ThemeSwitch />
+      <Text style ={{color: 'black'}} >ProfileView</Text>
+        <Button title='Home' onPress={()=> {navigation.navigate('Home')}}/>
     </View>
   );
+  
 };
 
 const styles = StyleSheet.create({
@@ -20,4 +20,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SettingView
+export default ProfileView
