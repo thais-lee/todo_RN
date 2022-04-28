@@ -1,53 +1,14 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, Text, Button, Modal, Pressable} from 'react-native';
-import ModalInput from '../todo/components/ModalInput';
+import React from 'react';
+import {View, StyleSheet} from 'react-native';
 
 const ProfileView = ({navigation}) => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const handleVisibleModal = props => {
-    setModalVisible(props);
-  };
+
   return (
     <View style={styles.home}>
-      <Button title="ShowModal" onPress={() => setModalVisible(true)} />
       <View style={{}}>
-        <ModalInput
-          handlePress={handleVisibleModal}
-          modalVisible={modalVisible}
-        />
       </View>
     </View>
   );
-  // return (
-  //   <View style={styles.centeredView}>
-  //     <Modal
-  //       animationType="slide"
-  //       transparent={true}
-  //       visible={modalVisible}
-  //       onRequestClose={() => {
-  //         setModalVisible(!modalVisible);
-  //       }}
-  //     >
-  //       <View style={styles.centeredView}>
-  //         <View style={styles.modalView}>
-  //           <Text style={styles.modalText}>Hello World!</Text>
-  //           <Pressable
-  //             style={[styles.button, styles.buttonClose]}
-  //             onPress={() => setModalVisible(!modalVisible)}
-  //           >
-  //             <Text style={styles.textStyle}>Hide Modal</Text>
-  //           </Pressable>
-  //         </View>
-  //       </View>
-  //     </Modal>
-  //     <Pressable
-  //       style={[styles.button, styles.buttonOpen]}
-  //       onPress={() => setModalVisible(true)}
-  //     >
-  //       <Text style={styles.textStyle}>Show Modal</Text>
-  //     </Pressable>
-  //   </View>
-  // )
 };
 
 const styles = StyleSheet.create({
