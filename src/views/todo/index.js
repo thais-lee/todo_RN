@@ -1,61 +1,104 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, FlatList} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 
-import AddInput from './components/AddInput';
-import TodoList from './components/Todolist';
+import TodoItem from './components/TodoItem';
+
+import {
+  editTask,
+  checkTask,
+  addTodo,
+  deleteTodo,
+  getTodo,
+} from '../todo/store/db';
+
+import ModalInput from './components/ModalInput';
+import Icon from 'react-native-vector-icons/Feather';
 
 const TodoView = () => {
   const [data, setData] = useState([]);
-  const addTask = value => {
-    setData(prevTodo => {
-      return [
-        {
-          key: Date.now(),
-          value: value,
-          isComplete: false,
-        },
-        ...prevTodo,
-      ];
-    });
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handleVisibleModal = props => {
+    setModalVisible(props);
   };
 
-  const checkedTask = key => {
-    setData(prevTodo => {
-      return prevTodo.map(todo => {
-        if (todo.key === key) {
-          todo.isComplete = !todo.isComplete;
-        }
-        return todo;
-      });
-    });
+  const getTodoApi = async () => {
+    try {
+      const listOfTask = await getTodo();
+      setData(listOfTask.list);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const addTodoApi = async () => {
+    if (title !== '') {
+      await addTodo({title: title, description: description});
+    }
+    getTodoApi();
+    setTitle('');
+    setDescription('');
   };
 
-  const deleteItem = key => {
-    setData(prevTodo => {
-      return prevTodo.filter(todo => todo.key !== key);
-    });
+  const deleteTodoApi = async key => {
+    await deleteTodo(key);
+    getTodoApi();
   };
+
+  const checkTaskApi = async key => {
+    await checkTask(key);
+    getTodoApi();
+  };
+
+  const editApi = async item => {
+    await editTask(item);
+    getTodoApi();
+  };
+
+  useEffect(() => {
+    getTodoApi();
+  }, []);
 
   return (
     <View style={styles.container}>
       <View style={styles.headerBar}>
         <Text style={styles.header}>Your Task</Text>
       </View>
-      <View style={{flex: 0.775}}>
+
+      <View style={styles.list}>
         <FlatList
           data={data}
           keyExtractor={item => item.key}
           renderItem={({item}) => (
-            <TodoList
+            <TodoItem
               item={item}
-              checkedTask={checkedTask}
-              deleteItem={deleteItem}
+              modalVisible={modalVisible}
+              handleVisibleModal={handleVisibleModal}
+              checkTask={checkTaskApi}
+              editTask={editApi}
+              deleteTodo={deleteTodoApi}
+              getTodoApi={getTodoApi}
             />
           )}
         />
       </View>
 
-      <AddInput addTask={addTask}></AddInput>
+      <TouchableOpacity
+        onPress={() => setModalVisible(true)}
+        style={styles.addWrapper}>
+        <Icon name="plus" color="#42C2FF" size={35} style={{padding: 7}} />
+      </TouchableOpacity>
+
+      <ModalInput
+        handleVisibleModal={handleVisibleModal}
+        modalVisible={modalVisible}
+        title={title}
+        setTitle={setTitle}
+        description={description}
+        setDescription={setDescription}
+        handleSaveFunction={addTodoApi}
+      />
     </View>
   );
 };
@@ -71,7 +114,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     fontWeight: 'bold',
     paddingBottom: 10,
-    color: 'black'
+    color: 'black',
   },
   text: {
     color: 'black',
@@ -82,8 +125,19 @@ const styles = StyleSheet.create({
   headerBar: {
     borderBottomWidth: 1,
     marginHorizontal: 10,
-    flex: 0.115
+    flex: 0.115,
+  },
 
+  list: {
+    flex: 0.88,
+  },
+  addWrapper: {
+    position: 'absolute',
+    bottom: 15,
+    right: 20,
+    backgroundColor: '#F7F5F2',
+    borderRadius: 30,
   },
 });
+
 export default TodoView;

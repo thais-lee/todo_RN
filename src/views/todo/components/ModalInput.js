@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   Modal,
   StyleSheet,
@@ -7,61 +7,82 @@ import {
   Text,
   TextInput,
   KeyboardAvoidingView,
-  Platform,
-  TouchableWithoutFeedback,
 } from 'react-native';
 
-const ModalInput = ({handlePress, modalVisible}) => {
+const ModalInput = props => {
+
+  const handlePressSave = () => {
+    props.handleSaveFunction();
+    props.handleVisibleModal(false);
+  };
+
+  const handleCancel = () => {
+    props.setTitle('');
+    props.setDescription('');
+    props.handleVisibleModal(false);
+  };
+
   return (
-    <TouchableWithoutFeedback onPress={() => handlePress(false)} style={{backgroundColor:'red'}}>
-      <Modal
-        transparent={true}
-        animationType="fade"
-        visible={modalVisible}
-        onRequestClose={() => handlePress(!modalVisible)}
-        onDismiss={() => handlePress(false)}>
-        <KeyboardAvoidingView behavior="height" style={styles.container}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Insert new Task</Text>
-            <View style={{width: '100%'}}>
-              <View style={styles.inputWrapper}>
-                <Text style={styles.inputTitle}>Title: </Text>
-                <TextInput
-                  style={[styles.input, {height: 50}]}
-                  multiline={true}
-                  placeholderTextColor="black"
-                  placeholder="Type here"
-                />
-              </View>
-              <View style={styles.inputWrapper}>
-                <Text style={styles.inputTitle}>Description: </Text>
-                <TextInput
-                  style={[styles.input, {height: 100}]}
-                  multiline={true}
-                  placeholderTextColor="black"
-                  placeholder="Type here"
-                />
-              </View>
+    <Modal
+      transparent={true}
+      animationType="none"
+      visible={props.modalVisible}
+      onRequestClose={() => handlePress(!props.modalVisible)}>
+
+      <KeyboardAvoidingView behavior="height" style={styles.container}>
+        <View style={styles.modalView}>
+          <Text style={styles.modalText}>Task</Text>
+          <View style={{width: '100%'}}>
+            <View style={styles.inputWrapper}>
+              <Text style={styles.inputTitle}>Title: </Text>
+
+              <TextInput
+                style={[styles.input, {height: 50}]}
+                multiline={true}
+                placeholderTextColor="#F2F2F2"
+                placeholder="Type here"
+                value={props.title}
+                onChangeText={title => props.setTitle(title)}
+              />
             </View>
-            <View style={styles.controlButtonView}>
-              <Pressable
-                onPress={() => handlePress(false)}
-                style={[
-                  styles.controlButton,
-                  {marginEnd: 12, backgroundColor: '#4D77FF'},
-                ]}>
-                <Text style={[styles.textSave]}>Save</Text>
-              </Pressable>
-              <Pressable
-                onPress={() => handlePress(false)}
-                style={[styles.controlButton]}>
-                <Text style={styles.textCancel}>Cancel</Text>
-              </Pressable>
+
+            <View style={styles.inputWrapper}>
+              <Text style={styles.inputTitle}>Description: </Text>
+
+              <TextInput
+                style={[styles.input, {height: 100}]}
+                multiline={true}
+                placeholderTextColor="#F2F2F2"
+                placeholder="Type here"
+                value={props.description}
+                onChangeText={desc => props.setDescription(desc)}
+              />
             </View>
           </View>
-        </KeyboardAvoidingView>
-      </Modal>
-    </TouchableWithoutFeedback>
+          <View style={styles.controlButtonView}>
+
+            <Pressable
+              onPress={() => {
+                handlePressSave();
+                console.log({title: props.title, des: props.description});
+              }}
+              style={[
+                styles.controlButton,
+                {marginEnd: 12, backgroundColor: '#4D77FF'},
+              ]}>
+              <Text style={[styles.textSave]}>Save</Text>
+            </Pressable>
+
+            <Pressable
+              onPress={() => handleCancel()}
+              style={[styles.controlButton]}>
+              <Text style={styles.textCancel}>Cancel</Text>
+            </Pressable>
+            
+          </View>
+        </View>
+      </KeyboardAvoidingView>
+    </Modal>
   );
 };
 
@@ -119,12 +140,11 @@ const styles = StyleSheet.create({
   inputWrapper: {
     width: '100%',
     alignItems: 'center',
-    flexWrap: 'wrap',
   },
   inputTitle: {
-    width: 70,
     color: '#2C3333',
     alignSelf: 'flex-start',
+    fontWeight: 'bold',
   },
   input: {
     marginLeft: 10,
