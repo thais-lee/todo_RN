@@ -1,43 +1,79 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, As} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+import {editTask} from '../store/db';
+import ModalInput from './ModalInput';
 
-const TodoList = ({item, checkedTask, deleteItem}) => {
+const TodoItem = ({item, modalVisible, handleVisibleModal, checkTask, deleteTodo, getTodoApi}) => {
+
+  const [title, setTitle] = useState(item.title);
+  const [description, setDescription] = useState(item.description);
+  const [visible, setVisible] = useState(false);
+
+  const editTaskApi = async () => {
+    await editTask({key: item.key, title: title, description: description});
+    getTodoApi();
+  };
+
   const [isExtended, setExtended] = useState(false);
   return (
     <View style={styles.container}>
-      {item.isComplete && <View style={styles.isCompleteBadge} />}
+
+      {item.isDone && <View style={styles.isCompleteBadge} />}
+
       <View style={styles.checkWraper}>
         <TouchableOpacity
           onPress={() => {
-            checkedTask(item.key);
+            checkTask(item.key);
           }}>
           <Icon
-            name={item.isComplete === true ? 'check-square' : 'square'}
+            name={item.isDone === true ? 'check-square' : 'square'}
             size={30}
             color="#42C2FF"
           />
         </TouchableOpacity>
       </View>
+
       <View style={styles.textWrapper}>
+
+        <Text style={styles.textTitle}>{item.title}</Text>
+
         <Text
           numberOfLines={isExtended ? 0 : 1}
-          style={styles.text}
+          style={styles.textDescription}
           onPress={() => setExtended(!isExtended)}>
-          {item.value}
+          {item.description}
         </Text>
+
       </View>
+
       <View style={styles.editWrapper}>
-        <TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => {
+            setVisible(true);
+          }}>
           <Icon name="edit-2" size={30} color="#006778" />
         </TouchableOpacity>
+
       </View>
+
       <View style={styles.deleteWraper}>
-        <TouchableOpacity onPress={() => deleteItem(item.key)}>
+        <TouchableOpacity onPress={() => deleteTodo(item.key)}>
           <Icon name="trash-2" size={30} color="#FF1818" />
         </TouchableOpacity>
       </View>
+
+      <ModalInput
+        handleVisibleModal={()=> setVisible(false)}
+        modalVisible={visible}
+        title={title}
+        setTitle={setTitle}
+        description={description}
+        setDescription={setDescription}
+        handleSaveFunction={editTaskApi}
+      />
+    
     </View>
   );
 };
@@ -66,7 +102,11 @@ const styles = StyleSheet.create({
   editWrapper: {
     flex: 0.1,
   },
-  text: {
+  textTitle: {
+    fontWeight: 'bold',
+    color: '#383838',
+  },
+  textDescription: {
     color: '#180A0A',
   },
   isCompleteBadge: {
@@ -81,4 +121,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TodoList;
+export default TodoItem;
