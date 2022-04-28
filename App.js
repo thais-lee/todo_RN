@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import Navigator from './src/navigations';
+import Navigator from '@myapp/navigations';
 const App = () => {
   
 

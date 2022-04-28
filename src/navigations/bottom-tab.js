@@ -1,14 +1,15 @@
-import * as React from 'react';
+import React from 'react';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useTheme} from 'react-native-paper';
 
 import Icon from 'react-native-vector-icons/Feather';
-import HomeView from '../views/home/home.view.js';
-import SettingView from '../views/setting/setting.view.js';
-import ProfileView from '../views/profile/profile.view.js';
-import TodoView from '../views/todo/index.js';
+// import HomeView from '@myapp/views/home/home.view';
+import HomeView from '@myapp/views/home/home.view'
+import SettingView from '@myapp/views/setting/setting.view.js'
+import ProfileView from '@myapp/views/profile/profile.view.js';
+import TodoView from '@myapp/views/todo/index.js';
 
 const Tab = createBottomTabNavigator();
 const HomeIcon = props => <Icon {...props} name="home" />;
