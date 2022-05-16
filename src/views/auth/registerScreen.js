@@ -30,6 +30,7 @@ const RegisterScreen = ({navigation}) => {
   const [visible, setVisible] = React.useState(false);
   const [loading, setLoading] = useState(false);
   const [errortext, setErrortext] = useState('');
+  const [isAgree, setIsAgree] = useState(false);
 
   return (
     <View style={{flex: 1, backgroundColor: '#F2F2F2'}}>
@@ -68,16 +69,36 @@ const RegisterScreen = ({navigation}) => {
             />
           </View>
           <View style={styles.wrapper}>
-            <InputItem placehoderContent="Email" iconName="mail" />
+            <InputItem
+              placehoderContent="Email"
+              iconName="mail"
+              onChange={address => {
+                setEmailAddress(address);
+              }}
+            />
           </View>
           <View style={styles.wrapper}>
-            <InputItem placehoderContent="Username" iconName="ios-at-outline" />
+            <InputItem
+              placehoderContent="Username"
+              onChange={usname => setUserName(usname)}
+              iconName="ios-at-outline"
+            />
           </View>
           <View style={styles.wrapper}>
-            <InputItem placehoderContent="Phone" iconName="call-sharp" />
+            <InputItem
+              placehoderContent="Phone"
+              iconName="call-sharp"
+              onChange={phone => setPhoneNumber(phone)}
+            />
           </View>
           <View style={styles.wrapper}>
-            <InputItem placehoderContent="Address" iconName="location-sharp" />
+            <InputItem
+              placehoderContent="Address"
+              iconName="location-sharp"
+              onChange={addr => {
+                setAddress;
+              }}
+            />
           </View>
 
           <View style={styles.wrapper}>
@@ -85,8 +106,8 @@ const RegisterScreen = ({navigation}) => {
               placehoderContent="Gender"
               style={{width: '48%'}}
               iconName="md-female"
-              onChange={name => {
-                setName(name);
+              onChange={gender => {
+                setGender(gender);
               }}
             />
             <View style={styles.date}>
@@ -115,13 +136,27 @@ const RegisterScreen = ({navigation}) => {
             />
           </View>
           <View style={styles.wrapper}>
-            <InputItem placehoderContent="Password" iconName="eye-sharp" />
+            <InputItem
+              placehoderContent="Password"
+              iconName="eye-sharp"
+              onChange={pass => setPassword(pass)}
+            />
           </View>
           <View style={styles.agree}>
-            <Icon name="square-outline" size={30} />
-            <Text>I read and agree to Term & Conditions</Text>
+            <Icon
+              style={{marginLeft: 5}}
+              name={isAgree ? 'checkbox-outline' : 'square-outline'}
+              onPress={() => setIsAgree(!isAgree)}
+              size={30}
+            />
+            <Text style={{marginLeft: 6}}>
+              I read and agree to Term & Conditions
+            </Text>
           </View>
-          <TouchableOpacity style={styles.registerButton}>
+          <TouchableOpacity
+            style={isAgree ? styles.registerButton : styles.disableButton}
+            activeOpacity={0.75}
+            disabled={isAgree ? false : true}>
             <Text style={styles.textRes}>REGISTER</Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -164,6 +199,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#f1c40f',
+    alignSelf: 'center',
+    borderRadius: 8,
+  },
+  disableButton: {
+    height: 65,
+    width: '95%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#7f8c8d',
     alignSelf: 'center',
     borderRadius: 8,
   },
