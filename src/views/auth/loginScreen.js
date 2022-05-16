@@ -12,8 +12,8 @@ import {
 } from 'react-native';
 
 const LoginView = ({navigation}) => {
-  const [userEmail, setuserEmail] = useState('');
-  const [userPassword, setuserPassword] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const [userPassword, setUserPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
   return (
@@ -40,13 +40,16 @@ const LoginView = ({navigation}) => {
               />
             </View>
             <View style={styles.headerTextWrapper}>
-              <Text style={{color: '#15133C', fontWeight:'bold', fontSize: 25}}>Banana Corporator</Text>
+              <Text
+                style={{color: '#15133C', fontWeight: 'bold', fontSize: 25}}>
+                Banana Corporator
+              </Text>
             </View>
             <View style={styles.sectionStyle}>
               <TextInput
                 style={styles.inputStyle}
                 onChangeText={email => {
-                  setuserEmail(email);
+                  setUserEmail(email);
                 }}
                 placeholder="Enter Email" //dummy@abc.com
                 placeholderTextColor="#8b9cb5"
@@ -61,7 +64,7 @@ const LoginView = ({navigation}) => {
               <TextInput
                 style={styles.inputStyle}
                 onChangeText={password => {
-                  setuserPassword(password);
+                  setUserPassword(password);
                 }}
                 placeholder="Enter Password"
                 placeholderTextColor="#8b9cb5"
@@ -77,7 +80,11 @@ const LoginView = ({navigation}) => {
             <TouchableOpacity style={styles.buttonStyle} activeOpacity={0.5}>
               <Text style={styles.buttonTextStyle}>LOGIN</Text>
             </TouchableOpacity>
-            <Text style={styles.registerTextStyle}>New here? Register</Text>
+            <TouchableOpacity
+              style={styles.register}
+              onPress={() => navigation.navigate('Register')}>
+              <Text style={styles.registerText}>New here? Register</Text>
+            </TouchableOpacity>
           </KeyboardAvoidingView>
         </View>
       </ScrollView>
@@ -112,7 +119,7 @@ const styles = StyleSheet.create({
     paddingRight: 15,
     borderWidth: 1,
     borderRadius: 30,
-    borderColor: '#dadae8',
+    borderColor: '#112B3C',
   },
   registerTextStyle: {
     color: '#FFFFFF',
@@ -140,6 +147,17 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     paddingVertical: 10,
     fontSize: 16,
+  },
+  register: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginTop: 5,
+    marginBottom: 15,
+  },
+  registerText: {
+    fontSize: 13,
+    fontWeight: 'bold',
   },
 });
 export default LoginView;
