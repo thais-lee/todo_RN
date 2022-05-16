@@ -49,7 +49,7 @@ export async function addTodo(newTask) {
 
 export async function deleteTodo(key) {
   let todos = await getTodo();
-  todos.list = todos.list.filter(todo => todo.key != key);
+  todos.list = todos.list.filter(todo => todo.key !== key);
   await saveTodo(todos);
   return todos;
 }

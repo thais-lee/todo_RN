@@ -5,9 +5,9 @@ const ThemeSwitch = () => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   return (
-    <View style = {styles.container}>
+    <View style={styles.container}>
       <View>
-        <Text style= {styles.text}>Dark</Text>
+        <Text style={styles.text}>Dark</Text>
       </View>
       <View>
         <Switch
@@ -18,21 +18,20 @@ const ThemeSwitch = () => {
         />
       </View>
       <View>
-          <Text style = {styles.text}>Light</Text>
+        <Text style={styles.text}>Light</Text>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        justifyContent: 'space-evenly',
-        alignItems: 'center',
-
-    },
-    text: {
-        color: 'black'
-    }
-})
+  container: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+  },
+  text: {
+    color: 'black',
+  },
+});
 export default ThemeSwitch;

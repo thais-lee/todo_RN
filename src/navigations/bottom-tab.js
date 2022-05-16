@@ -10,7 +10,7 @@ import HomeView from '@myapp/views/home/home.view';
 import SettingView from '@myapp/views/setting/setting.view.js';
 import ProfileView from '@myapp/views/profile/profile.view.js';
 import TodoView from '@myapp/views/todo/index.js';
-import LoginView from '@myapp/views/auth/login.view';
+import LoginView from '@myapp/views/auth/loginScreen';
 
 const Tab = createBottomTabNavigator();
 const HomeIcon = props => <Icon {...props} name="home" />;

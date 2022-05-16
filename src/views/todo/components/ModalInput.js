@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 
 const ModalInput = props => {
-
   const handlePressSave = () => {
     props.handleSaveFunction();
     props.handleVisibleModal(false);
@@ -28,7 +27,6 @@ const ModalInput = props => {
       animationType="none"
       visible={props.modalVisible}
       onRequestClose={() => handlePress(!props.modalVisible)}>
-
       <KeyboardAvoidingView behavior="height" style={styles.container}>
         <View style={styles.modalView}>
           <Text style={styles.modalText}>Task</Text>
@@ -60,7 +58,6 @@ const ModalInput = props => {
             </View>
           </View>
           <View style={styles.controlButtonView}>
-
             <Pressable
               onPress={() => {
                 handlePressSave();
@@ -78,7 +75,6 @@ const ModalInput = props => {
               style={[styles.controlButton]}>
               <Text style={styles.textCancel}>Cancel</Text>
             </Pressable>
-            
           </View>
         </View>
       </KeyboardAvoidingView>

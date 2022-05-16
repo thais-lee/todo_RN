@@ -4,8 +4,14 @@ import Icon from 'react-native-vector-icons/Feather';
 import {editTask} from '../store/db';
 import ModalInput from './ModalInput';
 
-const TodoItem = ({item, modalVisible, handleVisibleModal, checkTask, deleteTodo, getTodoApi}) => {
-
+const TodoItem = ({
+  item,
+  modalVisible,
+  handleVisibleModal,
+  checkTask,
+  deleteTodo,
+  getTodoApi,
+}) => {
   const [title, setTitle] = useState(item.title);
   const [description, setDescription] = useState(item.description);
   const [visible, setVisible] = useState(false);
@@ -18,7 +24,6 @@ const TodoItem = ({item, modalVisible, handleVisibleModal, checkTask, deleteTodo
   const [isExtended, setExtended] = useState(false);
   return (
     <View style={styles.container}>
-
       {item.isDone && <View style={styles.isCompleteBadge} />}
 
       <View style={styles.checkWraper}>
@@ -35,7 +40,6 @@ const TodoItem = ({item, modalVisible, handleVisibleModal, checkTask, deleteTodo
       </View>
 
       <View style={styles.textWrapper}>
-
         <Text style={styles.textTitle}>{item.title}</Text>
 
         <Text
@@ -44,18 +48,15 @@ const TodoItem = ({item, modalVisible, handleVisibleModal, checkTask, deleteTodo
           onPress={() => setExtended(!isExtended)}>
           {item.description}
         </Text>
-
       </View>
 
       <View style={styles.editWrapper}>
-
         <TouchableOpacity
           onPress={() => {
             setVisible(true);
           }}>
           <Icon name="edit-2" size={30} color="#006778" />
         </TouchableOpacity>
-
       </View>
 
       <View style={styles.deleteWraper}>
@@ -65,7 +66,7 @@ const TodoItem = ({item, modalVisible, handleVisibleModal, checkTask, deleteTodo
       </View>
 
       <ModalInput
-        handleVisibleModal={()=> setVisible(false)}
+        handleVisibleModal={() => setVisible(false)}
         modalVisible={visible}
         title={title}
         setTitle={setTitle}
@@ -73,7 +74,6 @@ const TodoItem = ({item, modalVisible, handleVisibleModal, checkTask, deleteTodo
         setDescription={setDescription}
         handleSaveFunction={editTaskApi}
       />
-    
     </View>
   );
 };

@@ -11,13 +11,15 @@ export async function axiosRequest(config) {
 
   const axiosConfig = {url, method, data, params};
 
-  const headers={
+  const headers = {
     Authorization: `Bearer ${token}`,
   };
 
-  if(token){
-    axios.headers = headers; 
+  if (token) {
+    axios.headers = headers;
   }
 
   const response = await axios(axiosConfig);
+
+  return response.data;
 }

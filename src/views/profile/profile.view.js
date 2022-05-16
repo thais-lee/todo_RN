@@ -2,11 +2,9 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 
 const ProfileView = ({navigation}) => {
-
   return (
     <View style={styles.home}>
-      <View style={{}}>
-      </View>
+      <View style={{}} />
     </View>
   );
 };
@@ -16,7 +14,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    backgroundColor:'#E6D5B8'
+    backgroundColor: '#E6D5B8',
   },
   centeredView: {
     flex: 1,
