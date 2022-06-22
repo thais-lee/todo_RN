@@ -1,11 +1,16 @@
 import React, {useState} from 'react';
+import { store } from '@myapp/store/store';
+import {Provider as ReduxProvider} from 'react-redux';
 
 import Navigator from '@myapp/navigations';
-import LoginView from '@myapp/views/auth/loginScreen';
-import SplashScreen from '@myapp/views/auth/splashScreen';
-import RegisterScreen from '@myapp/views/auth/registerScreen';
+
 const App = () => {
-  return <Navigator />;
+  return (
+    <ReduxProvider store={store}>
+      <Navigator />
+    </ReduxProvider>
+
+  );
 };
 
 export default App;

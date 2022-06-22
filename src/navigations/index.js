@@ -6,11 +6,14 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import RegisterScreen from '@myapp/views/auth/registerScreen';
 import LoginView from '@myapp/views/auth/loginScreen';
+import { useSelector } from 'react-redux';
+import { selectIsLoggedIn } from '@myapp/features/auth/auth.slice';
 
 const Stack = createNativeStackNavigator();
-const isLoggedIn = false;
+
 
 const Navigator = () => {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   return (
     <NavigationContainer>
       <Stack.Navigator>

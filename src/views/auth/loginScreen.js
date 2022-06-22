@@ -9,13 +9,25 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
+
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  authActions,
+  selectIsPendingLoggedIn,
+} from '@myapp/features/auth/auth.slice';
 
 const LoginView = ({navigation}) => {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const isPendingLoggedIn = useSelector(selectIsPendingLoggedIn);
 
+  if(isPendingLoggedIn) return(
+    <ActivityIndicator />
+  )
+    
   return (
     <View style={styles.mainBody}>
       <ScrollView
@@ -51,6 +63,7 @@ const LoginView = ({navigation}) => {
                 onChangeText={email => {
                   setUserEmail(email);
                 }}
+                // value={userEmail}
                 placeholder="Enter Email" //dummy@abc.com
                 placeholderTextColor="#8b9cb5"
                 autoCapitalize="none"
@@ -66,6 +79,7 @@ const LoginView = ({navigation}) => {
                 onChangeText={password => {
                   setUserPassword(password);
                 }}
+                // value={userPassword}
                 placeholder="Enter Password"
                 placeholderTextColor="#8b9cb5"
                 autoCapitalize="none"
@@ -77,14 +91,29 @@ const LoginView = ({navigation}) => {
                 onSubmitEditing={Keyboard.dismiss}
               />
             </View>
-            <TouchableOpacity style={styles.buttonStyle} activeOpacity={0.5}>
-              <Text style={styles.buttonTextStyle}>LOGIN</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.register}
-              onPress={() => navigation.navigate('Register')}>
-              <Text style={styles.registerText}>New here? Register</Text>
-            </TouchableOpacity>
+
+            <View>
+              <TouchableOpacity
+                style={styles.buttonStyle}
+                activeOpacity={0.5}
+                onPress={() => {
+                  // console.log(TEST, API);
+                  const ac = authActions.login({
+                    userEmail,
+                    userPassword,
+                  });
+                  dispatch(ac);
+                  // setUserEmail('');
+                  // setUserPassword('');
+                }}>
+                <Text style={styles.buttonTextStyle}>LOGIN</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.register}
+                onPress={() => navigation.navigate('Register')}>
+                <Text style={styles.registerText}>New here? Register</Text>
+              </TouchableOpacity>
+            </View>
           </KeyboardAvoidingView>
         </View>
       </ScrollView>
@@ -122,7 +151,7 @@ const styles = StyleSheet.create({
     borderColor: '#FFEF82',
   },
   buttonStyle: {
-    backgroundColor:'#f1c40f',
+    backgroundColor: '#f1c40f',
     borderWidth: 0,
     height: 40,
     alignItems: 'center',
