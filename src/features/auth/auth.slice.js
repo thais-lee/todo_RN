@@ -30,6 +30,12 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
       console.log('login failed');
     },
+
+    logout(state, action){
+      state.accessToken = undefined;
+      state.currentUser = undefined;
+      state.isLoggedIn = false;
+    }
   },
 });
 
