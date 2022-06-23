@@ -14,6 +14,7 @@ const Stack = createNativeStackNavigator();
 
 const Navigator = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  // const isLoggedIn = true;
   return (
     <NavigationContainer>
       <Stack.Navigator>

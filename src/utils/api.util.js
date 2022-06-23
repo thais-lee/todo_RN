@@ -8,18 +8,19 @@ export const axiosMethod = {
 
 export async function axiosRequest(config) {
   const {url, method, data, params, token} = config;
-
   const axiosConfig = {url, method, data, params};
-
-  const headers = {
-    Authorization: `Bearer ${token}`,
-  };
-
   if (token) {
-    axios.headers = headers;
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    axiosConfig.headers = headers;
   }
+  try {
+    const response = await axios(axiosConfig);
+    return response.data;
 
-  const response = await axios(axiosConfig);
-
-  return response.data;
+  } catch (error) {
+    console.log(error.message);
+  }
 }

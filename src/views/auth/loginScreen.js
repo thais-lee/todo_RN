@@ -63,7 +63,7 @@ const LoginView = ({navigation}) => {
                 onChangeText={email => {
                   setUserEmail(email);
                 }}
-                // value={userEmail}
+                value={userEmail}
                 placeholder="Enter Email" //dummy@abc.com
                 placeholderTextColor="#8b9cb5"
                 autoCapitalize="none"
@@ -79,7 +79,7 @@ const LoginView = ({navigation}) => {
                 onChangeText={password => {
                   setUserPassword(password);
                 }}
-                // value={userPassword}
+                value={userPassword}
                 placeholder="Enter Password"
                 placeholderTextColor="#8b9cb5"
                 autoCapitalize="none"
@@ -103,8 +103,8 @@ const LoginView = ({navigation}) => {
                     userPassword,
                   });
                   dispatch(ac);
-                  // setUserEmail('');
-                  // setUserPassword('');
+                  setUserEmail('');
+                  setUserPassword('');
                 }}>
                 <Text style={styles.buttonTextStyle}>LOGIN</Text>
               </TouchableOpacity>
