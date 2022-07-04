@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, StyleSheet, Switch, Text} from 'react-native';
 
-const ThemeSwitch = () => {
+const ThemeSwitch = ({toggle}) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   return (

@@ -11,13 +11,14 @@ import SettingView from '@myapp/views/setting/setting.view.js';
 import ProfileView from '@myapp/views/profile/profile.view.js';
 import TodoView from '@myapp/views/todo/index.js';
 import LoginView from '@myapp/views/auth/loginScreen';
+import GeneralInformationView from '@myapp/views/Notifications/index';
 
 const Tab = createBottomTabNavigator();
 const HomeIcon = props => <Icon {...props} name="home" />;
 const SettingIcon = props => <Icon {...props} name="settings" />;
 const ProfileIcon = props => <Icon {...props} name="user" />;
 const TodoIcon = props => <Icon {...props} name="layers" />;
-const KeyIcon = props => <Icon {...props} name="key" />;
+const NotiIcon = props => <Icon {...props} name="bell" />;
 
 const BottomTab = () => {
   const theme = useTheme();
@@ -57,6 +58,17 @@ const BottomTab = () => {
         }}
         component={ProfileView}
       />
+
+      <Tab.Screen
+        name="Notification"
+        options={{
+          tabBarIcon: ({color, size}) => {
+            return <NotiIcon color={color} size={size} />;
+          },
+        }}
+        component={GeneralInformationView}
+      />
+      
       <Tab.Screen
         name="Setting"
         options={{
@@ -65,15 +77,6 @@ const BottomTab = () => {
           },
         }}
         component={SettingView}
-      />
-      <Tab.Screen
-        name="Auth"
-        options={{
-          tabBarIcon: ({color, size}) => {
-            return <KeyIcon color={color} size={size} />;
-          },
-        }}
-        component={LoginView}
       />
     </Tab.Navigator>
   );

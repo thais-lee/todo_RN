@@ -1,15 +1,22 @@
 import React from 'react';
 import {View, StyleSheet, Text, Button} from 'react-native';
-import ThemeSwitch from './ThemeSwitch';
 import {useDispatch} from 'react-redux';
 import {authActions} from '@myapp/features/auth/auth.slice';
+import {useTheme, Switch} from 'react-native-paper';
+import {PreferencesContext} from '@myapp/features/theme/context';
 
-const SettingView = ({navigation}) => {
+const SettingView = () => {
   const dispatch = useDispatch();
+  const theme = useTheme();
+  const {toggleTheme, isThemeDark} = React.useContext(PreferencesContext);
 
   return (
     <View style={styles.home}>
-      <ThemeSwitch />
+      <Switch
+        color={theme.colors.primary}
+        onValueChange={toggleTheme}
+        value={isThemeDark}
+      />
       <Button
         title="Log out"
         onPress={() => {
@@ -25,7 +32,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
-    backgroundColor: '#E6D5B8',
   },
 });
 

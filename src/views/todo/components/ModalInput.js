@@ -8,6 +8,7 @@ import {
   TextInput,
   KeyboardAvoidingView,
 } from 'react-native';
+import {Appbar, FAB, useTheme} from 'react-native-paper';
 
 const ModalInput = props => {
   const handlePressSave = () => {
@@ -20,7 +21,8 @@ const ModalInput = props => {
     props.setDescription('');
     props.handleVisibleModal(false);
   };
-
+  const theme = useTheme();
+  console.log('theme', theme);
   return (
     <Modal
       transparent={true}
@@ -37,7 +39,7 @@ const ModalInput = props => {
               <TextInput
                 style={[styles.input, {height: 50}]}
                 multiline={true}
-                placeholderTextColor="#F2F2F2"
+                placeholderTextColor={theme.colors.text}
                 placeholder="Type here"
                 value={props.title}
                 onChangeText={title => props.setTitle(title)}
@@ -50,7 +52,7 @@ const ModalInput = props => {
               <TextInput
                 style={[styles.input, {height: 100}]}
                 multiline={true}
-                placeholderTextColor="#F2F2F2"
+                placeholderTextColor={theme.colors.primary}
                 placeholder="Type here"
                 value={props.description}
                 onChangeText={desc => props.setDescription(desc)}

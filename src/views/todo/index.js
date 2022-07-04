@@ -13,8 +13,11 @@ import {
 
 import ModalInput from './components/ModalInput';
 import Icon from 'react-native-vector-icons/Feather';
+import {Appbar, FAB, useTheme} from 'react-native-paper';
+
 
 const TodoView = () => {
+  const theme = useTheme();
   const [data, setData] = useState([]);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -106,7 +109,7 @@ const TodoView = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#E6D5B8',
+    // backgroundColor: '#E6D5B8',
   },
   header: {
     marginTop: 15,
@@ -114,10 +117,8 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     fontWeight: 'bold',
     paddingBottom: 10,
-    color: 'black',
   },
   text: {
-    color: 'black',
     fontSize: 32,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -135,7 +136,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 15,
     right: 20,
-    backgroundColor: '#F7F5F2',
+    // backgroundColor: '#F7F5F2',
     borderRadius: 30,
   },
 });

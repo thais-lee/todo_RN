@@ -69,11 +69,9 @@ const ProfileView = ({navigation}) => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    console.log('useeffect call');
     dispatch(authActions.getUserInfo());
   }, [dispatch]);
 
-  console.log('currentUser: ', currentUser);
   return (
     <ScrollView style={styles.home}>
       {/* <Text variant="titleMedium">{currentUser.fullName}</Text> */}
@@ -111,10 +109,10 @@ const ProfileView = ({navigation}) => {
 const styles = StyleSheet.create({
   home: {
     flex: 1,
-    backgroundColor: '#E6D5B8',
+    // backgroundColor: '#E6D5B8',
   },
   info: {
-    backgroundColor: '#ecf0f1',
+    // backgroundColor: '#ecf0f1',
     margin: 20,
     borderRadius: 10,
   },
