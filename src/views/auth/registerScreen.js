@@ -15,10 +15,12 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import InputItem from './component/inputItem';
 import DatePicker from 'react-native-date-picker';
+import {useDispatch, useSelector} from 'react-redux';
+import {authActions} from '@myapp/features/auth/auth.slice';
 
 const RegisterScreen = ({navigation}) => {
   const [name, setName] = useState('');
-  const [surName, setSurname] = useState('');
+  const [surname, setSurname] = useState('');
   const [userName, setUserName] = useState('');
   const [emailAddress, setEmailAddress] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -27,10 +29,27 @@ const RegisterScreen = ({navigation}) => {
   const [gender, setGender] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState(new Date());
   const [openCalendar, setOpenCalendar] = useState(false);
-  const [visible, setVisible] = React.useState(false);
-  const [loading, setLoading] = useState(false);
-  const [errortext, setErrortext] = useState('');
+
   const [isAgree, setIsAgree] = useState(false);
+
+  const dispatch = useDispatch();
+  const onRegisterPress = () => {
+    if (!!emailAddress && !!name && !!userName && !!password) {
+      dispatch(
+        authActions.register({
+          emailAddress,
+          userName,
+          name,
+          surname,
+          phoneNumber,
+          address,
+          gender,
+          dateOfBirth: "",
+          password,
+        }),
+      );
+    }
+  };
 
   return (
     <View style={{flex: 1, backgroundColor: '#F2F2F2'}}>
@@ -154,6 +173,7 @@ const RegisterScreen = ({navigation}) => {
             </Text>
           </View>
           <TouchableOpacity
+            onPress={onRegisterPress}
             style={isAgree ? styles.registerButton : styles.disableButton}
             activeOpacity={0.75}
             disabled={isAgree ? false : true}>

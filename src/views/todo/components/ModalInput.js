@@ -22,7 +22,6 @@ const ModalInput = props => {
     props.handleVisibleModal(false);
   };
   const theme = useTheme();
-  console.log('theme', theme);
   return (
     <Modal
       transparent={true}

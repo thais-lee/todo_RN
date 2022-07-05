@@ -11,8 +11,7 @@ import {selectIsLoggedIn} from '@myapp/features/auth/auth.slice';
 const Stack = createNativeStackNavigator();
 
 const Navigator = () => {
-  // const isLoggedIn = useSelector(selectIsLoggedIn);
-  const isLoggedIn = true;
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   return (
     <Stack.Navigator>
       {!isLoggedIn ? (

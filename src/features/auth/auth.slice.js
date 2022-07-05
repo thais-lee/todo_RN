@@ -22,13 +22,11 @@ const authSlice = createSlice({
       state.isPendingLoggedIn = false;
       state.isLoggedIn = true;
       state.accessToken = action.payload.accessToken;
-      console.log('login success', state.accessToken);
     },
 
     loginFailed(state, action) {
       state.isPendingLoggedIn = false;
       state.isLoggedIn = false;
-      console.log('login failed');
     },
 
     logout(state, action) {
@@ -51,6 +49,20 @@ const authSlice = createSlice({
       state.currentUser = undefined;
       state.isLoggedIn = false;
       state.isGettingUserInfo = false;
+    },
+    register(state, action) {
+      state.isPendingRegister = true;
+    },
+
+    registerSuccess(state, action) {
+      state.isPendingRegister = false;
+      state.isLoggedIn = true;
+      state.accessToken = action.payload.accessToken;
+    },
+
+    registerFailed(state, action) {
+      state.isPendingRegister = false;
+      state.isLoggedIn = false;
     },
   },
 });
