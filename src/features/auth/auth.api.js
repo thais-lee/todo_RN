@@ -9,7 +9,6 @@ class AuthenApi {
       password: userPassword,
       rememberClient: true,
     };
-    console.log('login');
     const res = await axiosRequest({
       url,
       method: axiosMethod.POST,
@@ -41,7 +40,6 @@ class AuthenApi {
       gender,
       dateOfBirth,
     };
-    console.log(data);
     try {
       const res = await axiosRequest({
         url,
@@ -49,7 +47,6 @@ class AuthenApi {
         data,
       });
 
-      console.log('canlogin', {canLogin: res.result.canLogin});
       return {canLogin: res.result.canLogin};
     } catch (error) {
       console.log(error?.res.data);

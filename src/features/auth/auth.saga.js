@@ -3,10 +3,8 @@ import {call, put, takeLatest, all, select} from 'redux-saga/effects';
 import authApi from './auth.api';
 
 function* handleLogin(action) {
-  console.log('action login', action);
   try {
     const res = yield call(authApi.loginApi, action.payload);
-    console.log('here');
     if (res === null) {
       yield put(authActions.loginFailed);
     } else yield put({type: authActions.loginSuccess.type, payload: res});
@@ -33,11 +31,8 @@ function* handleRegister(action) {
       userEmail: action.payload.emailAddress,
       userPassword: action.payload.password,
     });
-    console.log('res', res);
     yield put({type: authActions.registerSuccess.type, payload: res});
   } catch (error) {
-    console.log('saga', 'error here');
-
     yield put({type: authActions.registerFailed.type});
   }
 }
